@@ -25,6 +25,7 @@ async function userSignUpController(req, res) {
     }
     const payLoad = {
       ...req.body,
+      role: "GENRAL",
       password: hashPassword,
     };
     const userData = new userModel(payLoad);

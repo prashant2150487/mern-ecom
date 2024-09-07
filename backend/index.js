@@ -3,11 +3,12 @@ const connectDB = require("./config/db");
 require("dotenv").config();
 const cors = require("cors");
 const router = require("./routes/index.js");
-const cookieParser = require("cookie-parser");
+const cookieParser = require('cookie-parser');
 const app = express();
+
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL,
+    origin: process.env.FRONTEND_URL || "http://localhost:3000",
     credentials: true,
   })
 );
@@ -16,8 +17,17 @@ app.use("/api", router);
 app.use(cookieParser());
 
 const PORT = 8000 || process.env.PORT;
-connectDB();
 
-app.listen(PORT, () => {
-  console.log("Server is running", PORT);
-});
+try {
+  connectDB();
+} catch (err) {
+  console.error("Error connecting to database:", err);
+}
+
+app
+  .listen(PORT, () => {
+    console.log("Server is running", PORT);
+  })
+  .on("error", (err) => {
+    console.error("Error starting server:", err);
+  });

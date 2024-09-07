@@ -30,6 +30,7 @@ async function userSignUpController(req, res) {
     };
     const userData = new userModel(payLoad);
     const saveUser = await userData.save();
+    console.log("Signed Up");
     res.status(201).json({
       data: saveUser,
       success: true,

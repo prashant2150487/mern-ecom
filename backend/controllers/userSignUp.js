@@ -4,7 +4,6 @@ const bcrypt = require("bcryptjs");
 async function userSignUpController(req, res) {
   try {
     const { email, password, name } = req.body;
-    console.log(name, email, password);
     const user = await userModel.findOne({ email });
     if (user) {
       throw new Error("user exist already");
@@ -25,7 +24,7 @@ async function userSignUpController(req, res) {
     }
     const payLoad = {
       ...req.body,
-      role: "GENRAL",
+      role: "GENERAL",
       password: hashPassword,
     };
     const userData = new userModel(payLoad);

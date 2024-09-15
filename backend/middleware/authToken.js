@@ -6,8 +6,8 @@ async function authToken(req, res, next) {
 
     // console.log(token);
     if (!token) {
-      return res.status(200).json({
-        message: "User not Login",
+      return res.status(401).json({
+        message: "Unauthorized: No token provided",
         error: true,
         success: false,
       });
@@ -16,13 +16,18 @@ async function authToken(req, res, next) {
       // console.log(err);
       // console.log("decode", decoded);
       if (err) {
-        console.log("error auth : ", err);
+        console.error("Error verifying token:", err);
+        return res.status(401).json({
+          message: "Unauthorized: Invalid token",
+          error: true,
+          success: false,
+        });
       }
       req.userId = decoded?._id;
       next();
     });
   } catch (err) {
-    res.status(400).json({
+    res.status(500).json({
       message: err.message || err,
       data: [],
       error: true,

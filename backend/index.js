@@ -23,7 +23,7 @@ try {
 } catch (err) {
   console.error("Error connecting to database:", err);
 }
-
+                                                                                              
 app
   .listen(PORT, () => {
     console.log("Server is running", PORT);

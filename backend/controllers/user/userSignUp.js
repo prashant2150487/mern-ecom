@@ -1,4 +1,4 @@
-const userModel = require("../models/userModel.js");
+const userModel = require("../../models/userModel.js");
 const bcrypt = require("bcryptjs");
 
 async function userSignUpController(req, res) {
@@ -29,7 +29,7 @@ async function userSignUpController(req, res) {
     };
     const userData = new userModel(payLoad);
     const saveUser = await userData.save();
-    console.log("Signed Up");
+    // console.log("Signed Up");
     res.status(201).json({
       data: saveUser,
       success: true,

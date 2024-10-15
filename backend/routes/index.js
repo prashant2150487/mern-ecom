@@ -1,16 +1,16 @@
 const express = require("express");
+const userSignUpController = require("../controllers/user/userSignUp");
+const userSignInController = require("../controllers/user/userSignIn");
+const userDetailsController = require("../controllers/user/userDetails");
+const authToken = require("../middleware/authToken");
+const userLogOut = require("../controllers/user/userLogOut");
+const allUsers = require("../controllers/user/allUsers");
+const updateUser = require("../controllers/user/updateUser");
+const UploadProductController = require("../controllers/product/uploadProduct");
+const getProductController = require("../controllers/product/getProduct");
+const updateProductController = require("../controllers/product/updateProduct");
+const getCategoryProduct = require("../controllers/product/getCategoryProduct");
 const router = express.Router();
-
-const userSignUpController = require("../controllers/userSignUp.js");
-const userSignInController = require("../controllers/userSignIn.js");
-const authToken = require("../middleware/authToken.js");
-const userDetailsController = require("../controllers/userDetails.js");
-const userLogOut = require("../controllers/userLogOut.js");
-const allUsers = require("../controllers/allUsers.js");
-const updateUser = require("../controllers/updateUser.js");
-const UploadProductController = require("../controllers/uploadProduct.js");
-const getProductController = require("../controllers/getProduct.js");
-const updateProductController = require("../controllers/updateProduct.js");
 
 router.post("/signup", userSignUpController);
 router.post("/signin", userSignInController);
@@ -23,5 +23,6 @@ router.post("/update-user", authToken, updateUser);
 router.post("/upload-product", authToken, UploadProductController);
 router.get("/get-product", getProductController);
 router.post("/update-product", authToken, updateProductController);
+router.get("/get-categoryProduct", getCategoryProduct);
 
 module.exports = router;
